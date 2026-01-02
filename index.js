@@ -31,6 +31,48 @@ app.get("/todos", async (req, res) => {
 
 
 
+    app.get("/todos/:id", async(req,res)=>{
+    try{
+        const {id}= req.params;
+
+        const todo = await pool.query("SELECT * FROM Todo WHERE todo_id =$1",[id])
+        res.json(todo.rows[0])
+
+    }catch (err){
+        console.error(err.message)
+    }
+})
+
+
+
+app.put("/todos/:id", async(req,res)=>{
+    try{
+        const {id}= req.params
+        const {description}= req.body
+        const todo = await pool.query("UPDATE Todo SET description =$1 WHERE todo_id =$2", [description,id])
+        res.json("todo is updated")
+
+
+
+    }catch(err){
+        console.error(err.message)
+    }
+})
+
+
+app.delete("/todos/:id",async(req,res)=>{
+    try{
+        const {id}=req.params
+        const delTodo= await pool.query("DELETE FROM Todo WHERE todo_id=$1",[id])
+        res.json("todo was deleted")
+
+        
+    }catch(err){
+        console.error(err.message)
+    }
+})
+
+
 
 
 // app.get('/tshirt', (req, res) => {res.status(200).send('T-Shirt endpoint');});
