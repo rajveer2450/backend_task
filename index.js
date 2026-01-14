@@ -9,7 +9,7 @@ const pool = require('./db');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'ia ad dja dd abdadsafdfbhjfbafhabfj';
 const corsOptions = {
-  origin: 'https://cheery-bonbon-ce1403.netlify.app/',
+  origin: 'https://cheery-bonbon-ce1403.netlify.app',
   credentials: true
 };
 app.use(cors(corsOptions));
